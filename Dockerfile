@@ -24,8 +24,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install setuptools pip --upgrade --force-reinstall
 
-COPY . /opt
-RUN pip install -r requirements.txt
 
 WORKDIR /opt
 RUN wget https://github.com/google/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip
@@ -47,5 +45,8 @@ RUN python setup.py test
 WORKDIR /opt
 RUN wget https://developers.google.com/transit/gtfs-realtime/gtfs-realtime.proto
 RUN protoc --python_out=. ./gtfs-realtime.proto
+
+COPY . /opt
+RUN pip install -r /opt/requirements.txt
 
 ENTRYPOINT ["python",  "/opt/entrypoint.py"]
