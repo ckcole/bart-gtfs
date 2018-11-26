@@ -2,5 +2,6 @@ requests==2.20.1
 ipython==5.8.0
 ipdb==0.11
 protobuf==3.6.1
+psycopg2==2.7.6.1
 # pandas
 # sqlalchemy

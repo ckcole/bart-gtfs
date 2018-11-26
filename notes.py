@@ -1,3 +1,23 @@
+# postgres stuff.
+'''
+DROP TABLE IF EXISTS gtfs_rt;
+
+CREATE TABLE gtfs_rt(
+    id SERIAL PRIMARY KEY,
+    arrival_delay INTEGER,
+    arrival_time TIMESTAMP without time zone,
+    arrival_uncertainty SMALLINT,
+    departure_delay INTEGER,
+    departure_time TIMESTAMP without time zone,
+    departure_uncertainty SMALLINT,
+    stop_id VARCHAR (4),
+    stop_sequence SMALLINT,
+    trip_id VARCHAR (20),
+    scrape_time TIMESTAMP without time zone
+)
+'''
+
+
 import requests, json
 
 # this is the default key they offer to the public.
@@ -108,7 +128,8 @@ import gtfs_realtime_pb2
 
 proto = gtfs_realtime_pb2
 
-data = open("bintest.bin", "rb").read() # read file as string
+with open("bintest.pb", "rb") as f:
+    data = f.read() # read file as string
 decoder = _DecodeVarint32
 
 next_pos, pos = 0, 0
